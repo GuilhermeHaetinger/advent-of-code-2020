@@ -1,3 +1,4 @@
+# Day 1
 nums = (x -> parse(Int64, x)).(readlines("input.txt"))
 
 # Part 1

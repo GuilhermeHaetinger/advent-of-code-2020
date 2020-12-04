@@ -16,8 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup
-      run: cargo install --force cargo-make
+    - uses: davidB/rust-cargo-make@v1
     - name: Build
       run: cargo build --verbose
     - name: Run formatter

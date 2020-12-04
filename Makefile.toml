@@ -1,4 +1,10 @@
+[env]
+RUSTFLAGS="$RUSTFLAGS -A dead_code"
+
 [tasks.test]
-RUSTFLAGS = "-A dead_code"
 command = "cargo"
 args = ["test", "--lib"]
+
+[tasks.clippy]
+command = "cargo"
+args = ["clippy"]

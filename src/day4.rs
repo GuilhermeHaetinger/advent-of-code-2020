@@ -116,7 +116,7 @@ fn check_pid(val: &str) -> bool {
 
 #[cfg(test)]
 mod test {
-    pub use super::*;
+    use super::*;
 
     const INPUT_FILE: &str = "./inputs/day4.txt";
 

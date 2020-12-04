@@ -56,7 +56,7 @@ fn lookup_pair_that_sums_to(goal: i64, list_of_nums: &[i64]) -> (bool, i64, i64)
 
 #[cfg(test)]
 mod test {
-    pub use super::*;
+    use super::*;
 
     const INPUT_FILE: &str = "./inputs/day1.txt";
 

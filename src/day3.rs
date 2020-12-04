@@ -51,7 +51,7 @@ fn is_next_tree(
 
 #[cfg(test)]
 mod test {
-    pub use super::*;
+    use super::*;
 
     const INPUT_FILE: &str = "./inputs/day3.txt";
 

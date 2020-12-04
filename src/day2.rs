@@ -53,7 +53,7 @@ fn parse_line(line: &str) -> (usize, usize, char, &str) {
 
 #[cfg(test)]
 mod test {
-    pub use super::*;
+    use super::*;
 
     const INPUT_FILE: &str = "./inputs/day2.txt";
 

@@ -128,6 +128,6 @@ mod test {
     #[test]
     fn test_part2() {
         part2(INPUT_FILE);
-        // assert_eq!(part2(INPUT_FILE), 2655892800);
+        assert_eq!(part2(INPUT_FILE), 175);
     }
 }

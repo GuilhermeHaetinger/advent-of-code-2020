@@ -42,14 +42,13 @@ fn part2(input_file: &str) -> i64 {
     res
 }
 
-fn lookup_pair_that_sums_to(goal: i64, list_of_nums: &Vec<i64>) -> (bool, i64, i64) {
+fn lookup_pair_that_sums_to(goal: i64, list_of_nums: &[i64]) -> (bool, i64, i64) {
     let mut visited_map = HashMap::new();
     for num in list_of_nums {
         let compl = goal - *num;
-        match visited_map.get(&compl) {
-            Some(complement) => return (true, *num, *complement),
-            _ => (),
-        };
+        if let Some(complement) = visited_map.get(&compl) {
+            return (true, *num, *complement);
+        }
         visited_map.insert(*num, *num);
     }
     (false, 0, 0)
@@ -57,7 +56,7 @@ fn lookup_pair_that_sums_to(goal: i64, list_of_nums: &Vec<i64>) -> (bool, i64, i
 
 #[cfg(test)]
 mod test {
-    use super::*;
+    pub use super::*;
 
     const INPUT_FILE: &str = "./inputs/day1.txt";
 

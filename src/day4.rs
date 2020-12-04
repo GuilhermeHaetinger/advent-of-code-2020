@@ -25,7 +25,7 @@ fn read_lines_and_check_passports(
     let mut num_valid: i64 = 0;
     lines.append(&mut vec![String::from("")]);
     lines.iter().for_each(|line| {
-        if line.len() == 0 {
+        if line.is_empty() {
             if check_passport_attrs(&mut attr_map, validate_func_op) {
                 num_valid += 1;
             }
@@ -38,9 +38,9 @@ fn read_lines_and_check_passports(
 }
 
 fn add_line_attrs<'a>(line: &'a str, attr_map: &mut HashMap<&'a str, &'a str>) {
-    let separate_attrs: Vec<_> = line.split(" ").collect();
+    let separate_attrs: Vec<_> = line.split(' ').collect();
     separate_attrs.iter().for_each(|attr| {
-        let values: Vec<_> = attr.split(":").collect();
+        let values: Vec<_> = attr.split(':').collect();
         let (key, value) = (values[0], values[1]);
         attr_map.insert(key, value);
     });
@@ -111,16 +111,12 @@ fn check_hair_color(val: &str) -> bool {
 }
 
 fn check_pid(val: &str) -> bool {
-    val.len() == 9
-        && match val.parse::<u32>() {
-            Ok(_) => true,
-            Err(_) => false,
-        }
+    val.len() == 9 && val.parse::<u32>().is_ok()
 }
 
 #[cfg(test)]
 mod test {
-    use super::*;
+    pub use super::*;
 
     const INPUT_FILE: &str = "./inputs/day4.txt";
 

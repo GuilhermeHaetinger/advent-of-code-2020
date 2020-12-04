@@ -37,9 +37,9 @@ fn compute_valid_lines(input_file: &str, checker: &dyn Fn(&str) -> bool) -> i64 
 }
 
 fn parse_line(line: &str) -> (usize, usize, char, &str) {
-    let v: Vec<_> = line.split(" ").collect();
+    let v: Vec<_> = line.split(' ').collect();
     let (range, letter, password) = (v[0], v[1], v[2]);
-    let range_vec: Vec<_> = range.split("-").collect();
+    let range_vec: Vec<_> = range.split('-').collect();
     let (fst, scn): (usize, usize) = match range_vec.len() {
         2 => (
             range_vec[0].parse::<usize>().unwrap(),
@@ -47,13 +47,13 @@ fn parse_line(line: &str) -> (usize, usize, char, &str) {
         ),
         _ => return (0, 0, ' ', ""),
     };
-    let letter: char = letter.chars().nth(0).unwrap();
+    let letter: char = letter.chars().next().unwrap();
     (fst, scn, letter, password)
 }
 
 #[cfg(test)]
 mod test {
-    use super::*;
+    pub use super::*;
 
     const INPUT_FILE: &str = "./inputs/day2.txt";
 

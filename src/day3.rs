@@ -16,18 +16,18 @@ fn part2(input_file: &str) -> i64 {
         run_slope(&tree_map, 7, 1),
         run_slope(&tree_map, 1, 2),
     ];
-    let res = results.iter().fold(1, |acc, x| acc * x);
+    let res = results.iter().product();
     println!("Day 3 (P2) = {}", res);
     res
 }
 
-fn run_slope(tree_map: &Vec<String>, vec_x: usize, vec_y: usize) -> i64 {
+fn run_slope(tree_map: &[String], vec_x: usize, vec_y: usize) -> i64 {
     let mut x = 0;
     let mut y = 0;
     let mut count = 0;
     let map_len = tree_map.len();
     while y < map_len - vec_y {
-        if is_next_tree(&mut x, &mut y, &tree_map, vec_x, vec_y) {
+        if is_next_tree(&mut x, &mut y, tree_map, vec_x, vec_y) {
             count += 1;
         }
     }
@@ -37,20 +37,21 @@ fn run_slope(tree_map: &Vec<String>, vec_x: usize, vec_y: usize) -> i64 {
 fn is_next_tree(
     x: &mut usize,
     y: &mut usize,
-    tree_map: &Vec<String>,
+    tree_map: &[String],
     vec_x: usize,
     vec_y: usize,
 ) -> bool {
     let row_size = tree_map[0].len();
-    *x = (*x + vec_x) % row_size;
-    *y = *y + vec_y;
+    *x += vec_x;
+    *x %= row_size;
+    *y += vec_y;
 
     tree_map[*y].chars().nth(*x) == Some('#')
 }
 
 #[cfg(test)]
 mod test {
-    use super::*;
+    pub use super::*;
 
     const INPUT_FILE: &str = "./inputs/day3.txt";
 

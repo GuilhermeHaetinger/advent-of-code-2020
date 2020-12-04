@@ -1,5 +1,4 @@
-use super::util::*;
-use std::collections::HashMap;
+use {super::util::*, std::collections::HashMap};
 
 fn part1(input_file: &str) -> i64 {
     let lines = lines_from_file(input_file);

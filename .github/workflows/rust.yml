@@ -22,6 +22,6 @@ jobs:
     - name: Run formatter
       run: cargo fmt -- --check
     - name: Run clippy
-      run: cargo clippy -- -D warnings
+      run: cargo make clippy
     - name: Run tests
       run: cargo make test

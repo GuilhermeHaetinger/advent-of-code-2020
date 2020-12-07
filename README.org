@@ -1,0 +1,30 @@
+#+TITLE: Advent of Code 2020
+#+AUTHOR: Guilherme G. Haetinger
+
+This repo is supposed to keep track of my [[https://adventofcode.com/][Aoc 2020]] progress. I'm
+learning Rust for new endeavours and I feel like this is the best way
+to *start* getting the hang of it. I'm trying to read the
+documentation as I go through my code to check whether I could make it
+better. Since Rust restricts you a little bit by being really picky on
+your code, I am having trouble making the code look good and work at
+the same time. As I said, I'll be reviewing my code later on.
+
+* Testing
+
+  To test this repository, you can use the straightforward =cargo
+  test= command, but there will be a number of warnings given that I
+  don't really have a main file and don't call any of my functions
+  outside of tests. To avoid that, you can use *cargo-make*.
+
+  After installing it, run the following line:
+
+  #+BEGIN_SRC sh
+    cargo make test
+  #+END_SRC
+
+  This will show if the tests are *OK*. If you want the output of each
+  problem, do the following:
+
+  #+BEGIN_SRC sh
+    cargo make verbose-test
+  #+END_SRC

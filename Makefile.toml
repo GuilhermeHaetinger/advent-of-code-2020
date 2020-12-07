@@ -5,6 +5,10 @@ RUSTFLAGS = "-A dead_code"
 command = "cargo"
 args = ["test", "--lib"]
 
+[tasks.verbose-test]
+command = "cargo"
+args = ["test", "--lib", "--", "--nocapture"]
+
 [tasks.clippy]
 command = "cargo"
 args = ["clippy"]

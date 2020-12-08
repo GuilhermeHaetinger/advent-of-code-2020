@@ -42,7 +42,7 @@ fn part2(input_file: &str) -> i64 {
     let res = results
         .iter()
         .fold(Err(InfiniteLoopError { acc: 0 }), |prev, res| {
-            prev.or(res.clone())
+            prev.or_else(|_| res.clone())
         })
         .unwrap();
     println!("Day 8 (P2) = {}", res);
@@ -72,7 +72,7 @@ fn execute_lines(lines: Vec<String>) -> Result<i64, InfiniteLoopError> {
             _ => panic!(),
         }
     }
-    return Ok(acc);
+    Ok(acc)
 }
 
 fn toggle_jump_nop(line: String) -> String {

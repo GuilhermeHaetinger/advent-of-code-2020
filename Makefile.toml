@@ -12,3 +12,14 @@ args = ["test", "--lib", "--", "--nocapture"]
 [tasks.clippy]
 command = "cargo"
 args = ["clippy"]
+
+[tasks.build]
+command = "cargo"
+args = ["build", "--verbose"]
+
+[task.check-format]
+command = "cargo"
+args = ["fmt", "--", "--check"]
+
+[tasks.check-everything]
+run_task = {name = ["build", "check-format", "clippy", "test"]}

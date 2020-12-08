@@ -18,10 +18,12 @@ jobs:
     - uses: actions/checkout@v2
     - uses: davidB/rust-cargo-make@v1
     - name: Build
-      run: cargo build --verbose
+      run: cargo make build 
     - name: Run formatter
       run: cargo fmt -- --check
     - name: Run clippy
       run: cargo make clippy
     - name: Run tests
       run: cargo make test
+    - name: Just run everything 
+      run: cargo make check-everything 

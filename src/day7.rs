@@ -1,15 +1,13 @@
-use {super::util::*, std::collections::HashMap, std::collections::HashSet, std::fmt};
+use {super::util::*, std::collections::HashMap, std::collections::HashSet};
 
 struct Node {
-    name: String,
     parents: Vec<(i64, String)>,
     children: Vec<(i64, String)>,
 }
 
 impl Node {
-    fn new(name: String) -> Node {
+    fn new() -> Node {
         Node {
-            name,
             parents: vec![],
             children: vec![],
         }
@@ -30,7 +28,7 @@ impl Node {
     ) -> i64 {
         self.parents
             .iter()
-            .map(|(_n_times, parent)| {
+            .map(|(_, parent)| {
                 if visited.contains(parent) {
                     0
                 } else {
@@ -52,16 +50,6 @@ impl Node {
                 _ => 1,
             })
             .sum()
-    }
-}
-
-impl fmt::Display for Node {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(
-            f,
-            "name: {}, parents: {:?}, children: {:?}",
-            self.name, self.parents, self.children
-        )
     }
 }
 
@@ -88,11 +76,11 @@ fn populate_graph(lines: Vec<String>) -> HashMap<String, Node> {
     lines.iter().for_each(|line| {
         let (bag, children) = parse_bag_line(line);
         children.iter().for_each(|(num_times, child)| {
-            let buf_child = Node::new(child.clone());
+            let buf_child = Node::new();
             let node_child = bag_map.entry(child.clone()).or_insert(buf_child);
             node_child.add_parent((*num_times, bag.clone()));
 
-            let buf_parent = Node::new(bag.clone());
+            let buf_parent = Node::new();
             let node_parent = bag_map.entry(bag.clone()).or_insert(buf_parent);
             node_parent.add_child((*num_times, child.clone()));
         });

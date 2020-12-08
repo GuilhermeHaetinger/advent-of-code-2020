@@ -22,4 +22,4 @@ command = "cargo"
 args = ["fmt", "--", "--check"]
 
 [tasks.check-everything]
-run_task = {name = ["build", "check-format", "clippy", "test"]}
+run_task = {name = ["build", "check-format", "clippy", "verbose-test"]}

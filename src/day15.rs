@@ -23,12 +23,15 @@ fn run_process(line_file: &str, halt_pos: usize) -> i64 {
     let mut last_spoken: usize = starting_numbers.pop().unwrap();
     let first_idx = starting_numbers.len() + 1;
     let mut number_vec = vec![0; halt_pos];
-    starting_numbers.into_iter().enumerate().for_each(|(turn, num)| {
-        number_vec[num] = turn+1;
-    });
+    starting_numbers
+        .into_iter()
+        .enumerate()
+        .for_each(|(turn, num)| {
+            number_vec[num] = turn + 1;
+        });
     for idx in first_idx..halt_pos {
         let val = number_vec[last_spoken];
-        let next = if val == 0 { 0 } else {idx - val};
+        let next = if val == 0 { 0 } else { idx - val };
         number_vec[last_spoken] = idx;
         last_spoken = next;
     }

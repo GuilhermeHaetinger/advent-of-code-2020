@@ -80,7 +80,6 @@ fn part2(input_file: &str) -> u64 {
         }
     });
 
-    println!("{:?}", memory);
     let res = memory.values().sum();
     println!("Day 14 (P2) = {}", res);
     res

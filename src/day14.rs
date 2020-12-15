@@ -7,9 +7,7 @@ fn part1(input_file: &str) -> u64 {
     let mut mask_bin = 0;
 
     lines.iter().for_each(|line| {
-        let chars: Vec<char> = line.chars().collect();
-        let first_chars: String = chars[..3].iter().collect();
-        if first_chars == "mem" {
+        if line.contains("mem") {
             add_to_mem(line, remove_mask_bin, mask_bin, &mut memory)
         } else {
             let (rm, msk) = setup_mask(line);
@@ -26,15 +24,12 @@ fn part1(input_file: &str) -> u64 {
 fn setup_mask(line: &str) -> (u64, u64) {
     let line_vec: Vec<&str> = line.split(" = ").collect();
     let mask_line_str = line_vec[1];
-    let remove_mask_str = mask_line_str
-        .chars()
-        .map(|bin| if bin == 'X' { '1' } else { '0' })
-        .collect::<String>();
+    let mut remove_mask_str = String::from(mask_line_str);
+    remove_mask_str = remove_mask_str.replace("1", "0");
+    remove_mask_str = remove_mask_str.replace("X", "1");
 
-    let mask_str = mask_line_str
-        .chars()
-        .map(|bin| if bin == 'X' { '0' } else { bin })
-        .collect::<String>();
+    let mut mask_str = String::from(mask_line_str);
+    mask_str = mask_str.replace("X", "0");
 
     let remove_mask_bin = isize::from_str_radix(&remove_mask_str, 2).unwrap() as u64;
     let mask_bin = isize::from_str_radix(&mask_str, 2).unwrap() as u64;
@@ -58,31 +53,36 @@ fn part2(input_file: &str) -> u64 {
     let mut mask: Vec<char> = vec![];
 
     lines.iter().for_each(|line| {
-        let chars: Vec<char> = line.chars().collect();
-        let first_chars: String = chars[..3].iter().collect();
         let line_split: Vec<&str> = line.split(" = ").collect();
-        if first_chars == "mem" {
-            let idx_str: String = line_split[0]
-                .chars()
-                .filter(|c| c.is_ascii_digit())
-                .collect();
-            let addr = format!("{:036b}", idx_str.parse::<u64>().unwrap());
-            let applied_mask = apply_addr_mask(&mask, addr.chars().collect());
-            let val_str: String = line_split[1].chars().collect();
-            let value = val_str.parse::<u64>().unwrap();
-            get_possible_addresses(applied_mask.chars().collect(), 0)
-                .into_iter()
-                .for_each(|a| {
-                    memory.insert(a, value);
-                })
+        let left = line_split[0];
+        let right = line_split[1];
+        if left.contains("mem") {
+            add_floating_to_memory(&mask, left, right, &mut memory);
         } else {
-            mask = line_split[1].chars().collect();
+            mask = right.chars().collect();
         }
     });
 
     let res = memory.values().sum();
     println!("Day 14 (P2) = {}", res);
     res
+}
+
+fn add_floating_to_memory(
+    mask: &[char],
+    mem_addr: &str,
+    value: &str,
+    memory: &mut HashMap<String, u64>,
+) {
+    let idx_str: String = mem_addr.chars().filter(|c| c.is_ascii_digit()).collect();
+    let addr = format!("{:036b}", idx_str.parse::<u64>().unwrap());
+    let applied_mask = apply_addr_mask(&mask, addr.chars().collect());
+    let value = value.chars().collect::<String>().parse::<u64>().unwrap();
+    get_possible_addresses(applied_mask.chars().collect())
+        .into_iter()
+        .for_each(|a| {
+            memory.insert(a, value);
+        });
 }
 
 fn apply_addr_mask(mask: &[char], addr: Vec<char>) -> String {
@@ -97,30 +97,21 @@ fn apply_addr_mask(mask: &[char], addr: Vec<char>) -> String {
         .collect()
 }
 
-fn get_possible_addresses(address: Vec<char>, mut idx: usize) -> Vec<String> {
+fn get_possible_addresses(address: Vec<char>) -> Vec<String> {
     let mut new_paths: Vec<String> = vec![];
 
-    if idx == 36 {
-        return vec![address.iter().collect()];
+    if let Some(pos) = address.iter().position(|&c| c == 'X') {
+        let mut new_0_vec = address.clone();
+        new_0_vec[pos] = '0';
+        let mut new_1_vec = address;
+        new_1_vec[pos] = '1';
+        new_paths.append(&mut get_possible_addresses(new_0_vec));
+        new_paths.append(&mut get_possible_addresses(new_1_vec));
+
+        new_paths
+    } else {
+        vec![address.iter().collect()]
     }
-
-    let seek_x = address[idx..].iter().find(|&c| {
-        idx += 1;
-        *c == 'X'
-    });
-
-    if seek_x.is_none() {
-        return vec![address.iter().collect()];
-    };
-
-    let mut new_0_vec = address.clone();
-    new_0_vec[idx - 1] = '0';
-    let mut new_1_vec = address;
-    new_1_vec[idx - 1] = '1';
-    new_paths.append(&mut get_possible_addresses(new_0_vec, idx));
-    new_paths.append(&mut get_possible_addresses(new_1_vec, idx));
-
-    new_paths
 }
 
 #[cfg(test)]

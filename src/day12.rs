@@ -74,27 +74,25 @@ fn turn(vec: &mut (i64, i64), degrees: f64) {
 }
 
 fn part1(input_file: &str) -> i64 {
-    let lines = io::lines_from_file(input_file);
-    let ship = &mut Ship::new();
-    lines.into_iter().for_each(|line| {
-        ship.process_command(line);
-    });
-    let (x, y) = ship.position;
-    let res = x.abs() + y.abs();
+    let res = run_commands(input_file, &Ship::process_command);
     println!("Day 12 (P1) = {}", res);
     res
 }
 
 fn part2(input_file: &str) -> i64 {
+    let res = run_commands(input_file, &Ship::process_command_waypoint);
+    println!("Day 12 (P2) = {}", res);
+    res
+}
+
+fn run_commands(input_file: &str, process_func: &dyn Fn(&mut Ship, String)) -> i64 {
     let lines = io::lines_from_file(input_file);
     let ship = &mut Ship::new();
     lines.into_iter().for_each(|line| {
-        ship.process_command_waypoint(line);
+        process_func(ship, line);
     });
     let (x, y) = ship.position;
-    let res = x.abs() + y.abs();
-    println!("Day 12 (P2) = {}", res);
-    res
+    x.abs() + y.abs()
 }
 
 #[cfg(test)]

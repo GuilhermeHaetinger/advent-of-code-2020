@@ -1,7 +1,7 @@
-use {super::util::*, std::collections::HashMap, std::collections::HashSet};
+use {super::util::io, std::collections::HashMap, std::collections::HashSet};
 
 fn part1(input_file: &str) -> i64 {
-    let lines = lines_from_file(input_file);
+    let lines = io::lines_from_file(input_file);
     let mut adapter_set: HashSet<i64> = lines
         .into_iter()
         .map(|line| line.parse::<i64>().unwrap())
@@ -27,7 +27,7 @@ fn part1(input_file: &str) -> i64 {
 }
 
 fn part2(input_file: &str) -> i64 {
-    let lines = lines_from_file(input_file);
+    let lines = io::lines_from_file(input_file);
     let mut adapter_set: HashSet<i64> = lines
         .into_iter()
         .map(|line| line.parse::<i64>().unwrap())
@@ -97,11 +97,13 @@ mod test {
 
     #[test]
     fn test_part1() {
+        time_test!();
         assert_eq!(part1(INPUT_FILE), 2176);
     }
 
     #[test]
     fn test_part2() {
+        time_test!();
         assert_eq!(part2(INPUT_FILE), 18512297918464);
     }
 }

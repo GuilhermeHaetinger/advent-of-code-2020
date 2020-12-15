@@ -1,4 +1,4 @@
-use {super::util::*, std::fmt, std::result::Result};
+use {super::util::io, std::fmt, std::result::Result};
 
 #[derive(Debug, Clone)]
 struct InfiniteLoopError {
@@ -12,7 +12,7 @@ impl fmt::Display for InfiniteLoopError {
 }
 
 fn part1(input_file: &str) -> i64 {
-    let lines = lines_from_file(input_file);
+    let lines = io::lines_from_file(input_file);
     let res = match execute_lines(lines) {
         Ok(_) => panic!(),
         Err(InfiniteLoopError { acc }) => acc,
@@ -22,7 +22,7 @@ fn part1(input_file: &str) -> i64 {
 }
 
 fn part2(input_file: &str) -> i64 {
-    let lines = lines_from_file(input_file);
+    let lines = io::lines_from_file(input_file);
     let to_toggle: Vec<usize> = (0..lines.len() - 1)
         .filter(|line_idx| {
             let instr: Vec<&str> = lines[*line_idx].split(' ').collect();
@@ -94,11 +94,13 @@ mod test {
 
     #[test]
     fn test_part1() {
+        time_test!();
         assert_eq!(part1(INPUT_FILE), 1317);
     }
 
     #[test]
     fn test_part2() {
+        time_test!();
         assert_eq!(part2(INPUT_FILE), 1033);
     }
 }

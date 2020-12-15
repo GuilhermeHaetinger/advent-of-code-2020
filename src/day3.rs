@@ -1,14 +1,14 @@
-use super::util::*;
+use super::util::io;
 
 fn part1(input_file: &str) -> i64 {
-    let tree_map = lines_from_file(input_file);
+    let tree_map = io::lines_from_file(input_file);
     let res = run_slope(&tree_map, 3, 1);
     println!("Day 3 (P1) = {}", res);
     res
 }
 
 fn part2(input_file: &str) -> i64 {
-    let tree_map = lines_from_file(input_file);
+    let tree_map = io::lines_from_file(input_file);
     let results = vec![
         run_slope(&tree_map, 1, 1),
         run_slope(&tree_map, 3, 1),
@@ -57,11 +57,13 @@ mod test {
 
     #[test]
     fn test_part1() {
+        time_test!();
         assert_eq!(part1(INPUT_FILE), 207);
     }
 
     #[test]
     fn test_part2() {
+        time_test!();
         assert_eq!(part2(INPUT_FILE), 2655892800);
     }
 }

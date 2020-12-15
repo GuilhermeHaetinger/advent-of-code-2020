@@ -1,4 +1,4 @@
-use {super::util::*, std::collections::HashMap, std::collections::HashSet};
+use {super::util::io, std::collections::HashMap, std::collections::HashSet};
 
 struct Node {
     parents: Vec<(i64, String)>,
@@ -54,7 +54,7 @@ impl Node {
 }
 
 fn part1(input_file: &str) -> i64 {
-    let lines = lines_from_file(input_file);
+    let lines = io::lines_from_file(input_file);
     let bag_map = populate_graph(lines);
     let shiny_gold = bag_map.get("shiny gold").unwrap();
     let res = shiny_gold.get_total_num_parents(&bag_map, &mut HashSet::new());
@@ -63,7 +63,7 @@ fn part1(input_file: &str) -> i64 {
 }
 
 fn part2(input_file: &str) -> i64 {
-    let lines = lines_from_file(input_file);
+    let lines = io::lines_from_file(input_file);
     let bag_map = populate_graph(lines);
     let shiny_gold = bag_map.get("shiny gold").unwrap();
     let res = shiny_gold.get_total_num_children(&bag_map);
@@ -114,11 +114,13 @@ mod test {
 
     #[test]
     fn test_part1() {
+        time_test!();
         assert_eq!(part1(INPUT_FILE), 112);
     }
 
     #[test]
     fn test_part2() {
+        time_test!();
         assert_eq!(part2(INPUT_FILE), 6260);
     }
 }

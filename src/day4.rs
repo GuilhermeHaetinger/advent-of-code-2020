@@ -1,17 +1,17 @@
 use {
-    super::util::*,
+    super::util::io,
     std::{collections::HashMap, option::Option, string::String},
 };
 
 fn part1(input_file: &str) -> i64 {
-    let mut lines = lines_from_file(input_file);
+    let mut lines = io::lines_from_file(input_file);
     let num_valid = read_lines_and_check_passports(&mut lines, None);
     println!("Day 4 (P1) = {}", num_valid);
     num_valid
 }
 
 fn part2(input_file: &str) -> i64 {
-    let mut lines = lines_from_file(input_file);
+    let mut lines = io::lines_from_file(input_file);
     let num_valid = read_lines_and_check_passports(&mut lines, Some(&validate_key_val));
     println!("Day 4 (P2) = {}", num_valid);
     num_valid
@@ -122,12 +122,13 @@ mod test {
 
     #[test]
     fn test_part1() {
+        time_test!();
         assert_eq!(part1(INPUT_FILE), 228);
     }
 
     #[test]
     fn test_part2() {
-        part2(INPUT_FILE);
+        time_test!();
         assert_eq!(part2(INPUT_FILE), 175);
     }
 }

@@ -1,5 +1,5 @@
 [env]
-RUSTFLAGS = "-A dead_code"
+RUSTFLAGS = "-A dead_code -A unused_imports"
 
 [tasks.test]
 command = "cargo"

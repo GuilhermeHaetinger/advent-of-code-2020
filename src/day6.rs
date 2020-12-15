@@ -1,7 +1,7 @@
-use {super::util::*, std::collections::HashSet};
+use {super::util::io, std::collections::HashSet};
 
 fn part1(input_file: &str) -> i64 {
-    let mut lines = lines_from_file(input_file);
+    let mut lines = io::lines_from_file(input_file);
     let mut yes_set = HashSet::new();
     lines.push(String::from(""));
     let res = lines
@@ -24,7 +24,7 @@ fn part1(input_file: &str) -> i64 {
 }
 
 fn part2(input_file: &str) -> i64 {
-    let mut lines = lines_from_file(input_file);
+    let mut lines = io::lines_from_file(input_file);
     lines.push(String::from(""));
     let mut set_vec: Vec<HashSet<char>> = vec![];
     let res = lines
@@ -58,11 +58,13 @@ mod test {
 
     #[test]
     fn test_part1() {
+        time_test!();
         assert_eq!(part1(INPUT_FILE), 6585);
     }
 
     #[test]
     fn test_part2() {
+        time_test!();
         assert_eq!(part2(INPUT_FILE), 3276);
     }
 }

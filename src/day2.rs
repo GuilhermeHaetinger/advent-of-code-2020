@@ -1,4 +1,4 @@
-use super::util::*;
+use super::util::io;
 
 fn part1(input_file: &str) -> i64 {
     let num_valid_lines = compute_valid_lines(input_file, &fst_line_validation);
@@ -28,7 +28,7 @@ fn scn_line_validation(line: &str) -> bool {
 }
 
 fn compute_valid_lines(input_file: &str, checker: &dyn Fn(&str) -> bool) -> i64 {
-    let lines = lines_from_file(input_file);
+    let lines = io::lines_from_file(input_file);
     lines
         .iter()
         .map(|line| checker(line))
@@ -59,11 +59,13 @@ mod test {
 
     #[test]
     fn test_part1() {
+        time_test!();
         assert_eq!(part1(INPUT_FILE), 477);
     }
 
     #[test]
     fn test_part2() {
+        time_test!();
         assert_eq!(part2(INPUT_FILE), 686);
     }
 }

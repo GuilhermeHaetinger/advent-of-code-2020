@@ -1,4 +1,4 @@
-use super::util::*;
+use super::util::io;
 
 fn part1(input_file: &str) -> u64 {
     let seat_ids = get_seat_ids(input_file);
@@ -23,7 +23,7 @@ fn part2(input_file: &str) -> u64 {
 }
 
 fn get_seat_ids(input_file: &str) -> Vec<u64> {
-    let lines = lines_from_file(input_file);
+    let lines = io::lines_from_file(input_file);
     lines
         .iter()
         .map(|line| {
@@ -49,11 +49,13 @@ mod test {
 
     #[test]
     fn test_part1() {
+        time_test!();
         assert_eq!(part1(INPUT_FILE), 871);
     }
 
     #[test]
     fn test_part2() {
+        time_test!();
         assert_eq!(part2(INPUT_FILE), 640);
     }
 }

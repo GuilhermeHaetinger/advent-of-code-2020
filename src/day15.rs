@@ -29,11 +29,13 @@ fn run_process(line_file: &str, halt_pos: usize) -> i64 {
         .for_each(|(turn, num)| {
             number_vec[num] = turn + 1;
         });
-    for idx in first_idx..halt_pos {
+    let mut idx = first_idx;
+    while idx != halt_pos {
         let val = number_vec[last_spoken];
         let next = if val == 0 { 0 } else { idx - val };
         number_vec[last_spoken] = idx;
         last_spoken = next;
+        idx += 1;
     }
     last_spoken as i64
 }

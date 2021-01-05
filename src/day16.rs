@@ -107,7 +107,9 @@ fn get_range_hash_map(
             .map(|(idx, _)| idx)
             .collect();
 
-        let entry = range_map.entry(low_range.name.clone()).or_insert_with(&Vec::new);
+        let entry = range_map
+            .entry(low_range.name.clone())
+            .or_insert_with(&Vec::new);
         entry.append(&mut to_add);
     }
 

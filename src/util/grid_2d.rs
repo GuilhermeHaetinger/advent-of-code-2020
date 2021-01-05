@@ -10,4 +10,6 @@ pub const DIRECTIONS_2D: &[(i64, i64)] = &[
     (1, 1),
 ];
 
+pub const DIRECTIONS_HEX_2D: &[(i64, i64)] = &[(-1, 1), (-1, 0), (1, 0), (1, -1), (0, 1), (0, -1)];
+
 pub const ORIGIN: (i64, i64) = (0, 0);

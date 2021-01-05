@@ -1,6 +1,4 @@
-use std::iter::once_with;
-
-use {super::util::io, std::collections::HashMap};
+use super::util::io;
 
 fn part1(input_file: &str) -> i64 {
     let res = run_process(input_file, 2020);

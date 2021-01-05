@@ -97,7 +97,7 @@ fn parse_bag_line(line: &str) -> (String, Vec<(i64, String)>) {
             let child_split: Vec<&str> = bag_str.split(' ').collect();
             let child_name = [child_split[1], child_split[2]].join(" ");
             if child_split[0] == "no" {
-                (0 as i64, String::from(""))
+                (0_i64, String::from(""))
             } else {
                 (child_split[0].parse::<i64>().unwrap(), child_name)
             }

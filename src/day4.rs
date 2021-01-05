@@ -103,7 +103,7 @@ fn check_hair_color(val: &str) -> bool {
             .chars()
             .map(|c| -> bool {
                 let ascii = c as u32;
-                (ascii >= 48 && ascii <= 57) || (ascii >= 97 && ascii <= 102)
+                (48..=57).contains(&ascii) || (97..=102).contains(&ascii)
             })
             .filter(|b| !b)
             .count()

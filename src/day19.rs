@@ -59,7 +59,7 @@ fn part2(input_file: &str) -> usize {
 
 fn setup_rules_and_input(input_file: &str) -> (Vec<Rule>, Vec<String>) {
     let lines = io::lines_from_file(input_file);
-    let break_pos = lines.iter().position(|line| line == "").unwrap();
+    let break_pos = lines.iter().position(|line| line.is_empty()).unwrap();
     let str_rules: Vec<String> = lines[..break_pos].into();
     let mut rules: Vec<Rule> = vec![Rule::Empty(); 350];
     str_rules.into_iter().for_each(|line| {

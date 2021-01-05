@@ -76,7 +76,7 @@ fn part2(input_file: &str) -> i64 {
         .unwrap()
         .split('\n')
         .map(|n| {
-            if n != "" {
+            if !n.is_empty() {
                 n.parse::<i64>().unwrap()
             } else {
                 0

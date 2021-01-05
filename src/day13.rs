@@ -39,13 +39,13 @@ fn part2(input_file: &str) -> i64 {
         .enumerate()
         .map(|(id, num)| {
             if num == "x" {
-                (0 as i64, 1 as i64)
+                (0_i64, 1_i64)
             } else {
                 let x = num.parse::<i64>().unwrap();
                 (x - (id as i64), x)
             }
         })
-        .filter(|tup| *tup != (0 as i64, 1 as i64))
+        .filter(|tup| *tup != (0_i64, 1_i64))
         .collect();
 
     let res = crt::solve_crt(crt);

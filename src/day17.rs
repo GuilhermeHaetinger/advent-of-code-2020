@@ -66,7 +66,7 @@ fn count_3_d_neighbors((x, y, z): (usize, usize, usize), grid: &[Vec<Vec<char>>]
             for dx in -1..2 {
                 let (pos_x, pos_y, pos_z) = (x as i64 + dx, y as i64 + dy, z as i64 + dz);
                 let pos_vec = vec![pos_x, pos_y, pos_z];
-                if !pos_vec.iter().any(|&pos| pos < 0 as i64)
+                if !pos_vec.iter().any(|&pos| pos < 0_i64)
                     && !pos_vec.iter().any(|&pos| pos >= SIZE as i64)
                     && grid[pos_z as usize][pos_y as usize][pos_x as usize] == '#'
                 {
@@ -159,7 +159,7 @@ fn count_4_d_neighbors(
                     let (pos_x, pos_y, pos_z, pos_w) =
                         (x as i64 + dx, y as i64 + dy, z as i64 + dz, w as i64 + dw);
                     let pos_vec = vec![pos_x, pos_y, pos_z, pos_w];
-                    if !pos_vec.iter().any(|&pos| pos < 0 as i64)
+                    if !pos_vec.iter().any(|&pos| pos < 0_i64)
                         && !pos_vec.iter().any(|&pos| pos >= SIZE as i64)
                         && grid[pos_w as usize][pos_z as usize][pos_y as usize][pos_x as usize]
                             == '#'

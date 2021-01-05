@@ -44,7 +44,7 @@ fn part2(input_file: &str) -> i64 {
 
 fn get_players(input_file: &str) -> Vec<VecDeque<usize>> {
     let lines = io::lines_from_file(input_file);
-    let chunks = lines.rsplit(|s| s == "");
+    let chunks = lines.rsplit(|s| s.is_empty());
     chunks
         .map(|cards| {
             let mut queue = VecDeque::new();

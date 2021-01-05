@@ -107,7 +107,7 @@ fn get_range_hash_map(
             .map(|(idx, _)| idx)
             .collect();
 
-        let entry = range_map.entry(low_range.name.clone()).or_insert(vec![]);
+        let entry = range_map.entry(low_range.name.clone()).or_insert_with(&Vec::new);
         entry.append(&mut to_add);
     }
 
@@ -124,7 +124,7 @@ fn get_classification(
 
     let (now, items) = map[map.len() - 1].clone();
     for item in items {
-        if taken[item] != "" {
+        if !taken[item].is_empty() {
             continue;
         }
         taken[item] = now.clone();
@@ -147,7 +147,7 @@ fn get_ranges(lines: &[String]) -> (usize, Vec<(Range, Range)>) {
     let mut idx = 0;
     let mut ranges: Vec<(Range, Range)> = vec![];
     for line in lines {
-        if line == "" {
+        if line.is_empty() {
             break;
         }
         let line_split: Vec<&str> = line.split(": ").collect();

@@ -7,7 +7,7 @@ fn part1(input_file: &str) -> i64 {
     let res = lines
         .iter()
         .map(|line| {
-            if line == "" {
+            if line.is_empty() {
                 let set_size = yes_set.len() as i64;
                 yes_set.clear();
                 set_size
@@ -30,7 +30,7 @@ fn part2(input_file: &str) -> i64 {
     let res = lines
         .iter()
         .map(|line| {
-            if line == "" {
+            if line.is_empty() {
                 let intersection_set = set_vec.iter().fold(set_vec[0].clone(), |acc, set| {
                     acc.intersection(set).cloned().collect()
                 });

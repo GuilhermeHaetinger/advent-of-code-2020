@@ -13,7 +13,6 @@ mod day17;
 mod day18;
 mod day19;
 mod day2;
-mod day20;
 mod day21;
 mod day22;
 mod day23;
@@ -27,3 +26,5 @@ mod day7;
 mod day8;
 mod day9;
 mod util;
+#[allow(clippy::all)]
+mod day20;

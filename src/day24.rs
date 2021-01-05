@@ -6,7 +6,7 @@ use {
 fn part1(input_file: &str) -> i64 {
     let visited = create_tiles(input_file);
     let res = visited.values().filter(|&&b| b).count() as i64;
-    println!("{}", res);
+    println!("Day 24 (P1) = {}", res);
     res
 }
 
@@ -34,7 +34,7 @@ fn part2(input_file: &str) -> i64 {
         .last()
         .unwrap();
 
-    println!("{}", res);
+    println!("Day 24 (P2) = {}", res);
     res as i64
 }
 

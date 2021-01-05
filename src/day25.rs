@@ -8,12 +8,11 @@ fn part1(input_file: &str) -> i64 {
     let loop_one = find_loop_size(7, first);
     let loop_two = find_loop_size(7, second);
 
-    println!("{} = {}", loop_one, loop_two);
     let enc_one = execute_loop(loop_one, second);
     let enc_two = execute_loop(loop_two, first);
 
-    println!("{} = {}", enc_one, enc_two);
     assert_eq!(enc_one, enc_two);
+    println!("Day 25 (P1) = {}", enc_one);
     enc_one
 }
 
